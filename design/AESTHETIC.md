@@ -9,8 +9,12 @@ VISUAL_DENSITY: 4         // room to breathe; she's lingering, not scanning
 This is a kawaii reward journal for an 8-year-old — part game hub, part personal treasure chest. The vibe is warm, sparkly, cozy, and exciting all at once. It should feel like something she owns and wants to come back to, not a chore tracker dressed up in color.
 Not a school app. Not a parent dashboard. Not a productivity tool.
 
-Reference archetype: Claymorphism
+Reference archetype: Claymorphism (UI only)
 → Soft 3D inflated elements, pastel palette, playful and bouncy — kawaii done right in UI
+
+→ **Important distinction:** Claymorphism is for UI surfaces (cards, buttons, widgets, icons) — NOT for reward illustrations. Reward artwork should be **regular kawaii illustration**: flat-to-soft shading, clean black outlines, simple rounded shapes, big-eyed/cute character energy — think kawaii sticker/stationery art, not 3D inflated clay renders. The illustration style should feel hand-drawn and charming, distinct from (and complementary to) the claymorphic UI chrome around it.
+
+→ **Asset format:** Reward illustrations are exported as flat raster images (webp) with the **gradient backdrop baked directly into the artwork** — not composited in code. Vary the gradient across illustrations (a small rotating set of pastel combinations drawn from the locked palette below) so the rewards grid feels lively rather than repetitive. Square corners on the artwork itself (the surrounding card handles corner rounding).
 
 ## Forbidden Patterns
 
@@ -34,9 +38,10 @@ Reference archetype: Claymorphism
 - No dense tables or list views — use cards with breathing room
 
 ### Visual
-- No flat icons — use filled, rounded, slightly inflated icon style
+- No flat icons — use filled, rounded, slightly inflated icon style (UI chrome stays claymorphic)
 - No gradient text fills
 - No stock photography or generic illustration sets
+- Reward illustrations: regular kawaii (flat-to-soft shading, black outline, simple cute shapes) — NOT claymorphism/3D-clay renders. Keep the clay look confined to UI surfaces only.
 - Shadows must be soft and warm-tinted, never pure black drop shadows
 - Sparkle and shine moments are welcome — shimmer on rewards, star bursts on milestones — but used purposefully, not everywhere
 

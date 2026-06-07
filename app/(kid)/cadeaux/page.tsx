@@ -1,18 +1,31 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import Image from 'next/image'
 import { useStore } from '@/lib/store'
 import { motion } from 'framer-motion'
 import type { Reward } from '@/lib/types'
+import { illustrationGradient } from '@/lib/illustrationGradients'
+
+const FILTERS = [
+  { id: 'tous', label: 'Tous', test: () => true },
+  { id: 'petit', label: '≤ 100 pts', test: (r: Reward) => r.pointCost <= 100 },
+  { id: 'moyen', label: '101-300 pts', test: (r: Reward) => r.pointCost > 100 && r.pointCost <= 300 },
+  { id: 'grand', label: '300+ pts', test: (r: Reward) => r.pointCost > 300 },
+] as const
 
 export default function CadeauxPage() {
   const allRewards = useStore(s => s.rewards)
   const ledger = useStore(s => s.ledger)
   const requests = useStore(s => s.requests)
   const requestRewardRedemption = useStore(s => s.requestRewardRedemption)
+  const [filter, setFilter] = useState<typeof FILTERS[number]['id']>('tous')
 
-  const rewards = useMemo(() => allRewards.filter(r => r.active), [allRewards])
+  const rewards = useMemo(() => {
+    const active = allRewards.filter(r => r.active)
+    const activeFilter = FILTERS.find(f => f.id === filter) ?? FILTERS[0]
+    return active.filter(activeFilter.test)
+  }, [allRewards, filter])
   const totalPoints = useMemo(() => ledger.reduce((sum, e) => sum + e.amount, 0), [ledger])
 
   const isPending = (rewardId: string) =>
@@ -31,6 +44,28 @@ export default function CadeauxPage() {
           <span className="text-base font-bold text-[#1A1A1A]">{totalPoints}</span>
           <span className="text-xs text-[#9B7DB5]">pts</span>
         </div>
+      </div>
+
+      {/* Segmented filter */}
+      <div className="flex bg-[#F5E0FF] rounded-full p-1 gap-1">
+        {FILTERS.map(f => (
+          <button
+            key={f.id}
+            onClick={() => setFilter(f.id)}
+            className="relative flex-1 py-2 rounded-full text-xs font-bold transition-colors"
+          >
+            {filter === f.id && (
+              <motion.div
+                layoutId="cadeaux-filter-pill"
+                className="absolute inset-0 rounded-full bg-white shadow-[0_2px_8px_rgba(213,192,232,0.6)]"
+                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              />
+            )}
+            <span className={`relative ${filter === f.id ? 'text-[#FF6BB5]' : 'text-[#9B7DB5]'}`}>
+              {f.label}
+            </span>
+          </button>
+        ))}
       </div>
 
       {/* Rewards grid */}
@@ -68,13 +103,13 @@ function RewardCard({
 
   return (
     <motion.div
-      className="flex flex-col rounded-[20px] bg-white shadow-[0_4px_20px_rgba(213,192,232,0.40)] overflow-hidden"
+      className="flex flex-col rounded-b-[20px] bg-white shadow-[0_4px_20px_rgba(213,192,232,0.40)] overflow-hidden"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 22, delay: index * 0.06 }}
     >
-      {/* Illustration area */}
-      <div className="relative w-full aspect-[4/3] overflow-hidden">
+      {/* Illustration area — square corners on purpose, card clips the bottom only. Gradient is baked into the illustration itself. */}
+      <div className="relative w-full aspect-[4/3]">
         {reward.image ? (
           <Image
             src={reward.image}
@@ -86,7 +121,7 @@ function RewardCard({
         ) : (
           <div
             className="w-full h-full flex items-center justify-center text-5xl"
-            style={{ background: canAfford ? 'linear-gradient(135deg, #FFBF8C 0%, #FF6BB5 100%)' : '#F5E0FF' }}
+            style={{ background: illustrationGradient(index) }}
           >
             {reward.emoji ?? '🎁'}
           </div>

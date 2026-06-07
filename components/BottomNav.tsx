@@ -21,9 +21,6 @@ export default function BottomNav() {
         const active = pathname === href
         return (
           <Link key={href} href={href} className="flex flex-col items-center gap-1 min-w-[64px] pt-1">
-            {active && (
-              <span className="w-6 h-[3px] rounded-full bg-[#FF6BB5] mb-0.5" />
-            )}
             <Icon className={`w-6 h-6 ${active ? 'text-[#FF6BB5]' : 'text-[#9B7DB5]'}`} />
             <span className={`text-[10px] font-${active ? '600' : '500'} ${active ? 'text-[#FF6BB5]' : 'text-[#9B7DB5]'}`}>
               {label}

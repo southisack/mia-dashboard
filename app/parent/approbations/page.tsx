@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo, useState } from 'react'
 import { useStore } from '@/lib/store'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
@@ -7,10 +8,13 @@ import type { PendingRequest } from '@/lib/types'
 
 export default function ApprobationsPage() {
   const requests = useStore(s => s.requests)
+  const ledger = useStore(s => s.ledger)
   const approveRequest = useStore(s => s.approveRequest)
   const rejectRequest = useStore(s => s.rejectRequest)
+  const setPointsTo = useStore(s => s.setPointsTo)
   const router = useRouter()
 
+  const totalPoints = useMemo(() => ledger.reduce((sum, e) => sum + e.amount, 0), [ledger])
 
   const pending = requests.filter(r => r.status === 'pending')
   const history = requests.filter(r => r.status !== 'pending').slice(-10).reverse()
@@ -32,6 +36,9 @@ export default function ApprobationsPage() {
           )}
         </div>
       </div>
+
+      {/* Points editor */}
+      <PointsEditor totalPoints={totalPoints} onSet={setPointsTo} />
 
       {/* Pending requests */}
       {pending.length > 0 ? (
@@ -107,6 +114,69 @@ export default function ApprobationsPage() {
         ))}
       </div>
     </main>
+  )
+}
+
+function PointsEditor({
+  totalPoints,
+  onSet,
+}: {
+  totalPoints: number
+  onSet: (amount: number) => void
+}) {
+  const [editing, setEditing] = useState(false)
+  const [value, setValue] = useState(String(totalPoints))
+
+  const startEditing = () => {
+    setValue(String(totalPoints))
+    setEditing(true)
+  }
+
+  const save = () => {
+    const parsed = parseInt(value, 10)
+    if (!Number.isNaN(parsed) && parsed >= 0) {
+      onSet(parsed)
+    }
+    setEditing(false)
+  }
+
+  return (
+    <div className="bg-white rounded-[20px] shadow-[0_4px_20px_rgba(213,192,232,0.40)] px-5 py-4 flex items-center gap-4">
+      <span className="text-2xl">✨</span>
+      <div className="flex-1 min-w-0">
+        <p className="text-xs text-[#9B7DB5] font-medium">Points actuels de Mia</p>
+        {editing ? (
+          <input
+            type="number"
+            inputMode="numeric"
+            value={value}
+            onChange={e => setValue(e.target.value)}
+            autoFocus
+            className="mt-1 w-28 rounded-lg border border-[#D5C0E8] px-2 py-1 text-lg font-bold text-[#1A1A1A] focus:outline-none focus:border-[#FF6BB5]"
+          />
+        ) : (
+          <p className="text-2xl font-bold text-[#1A1A1A]">{totalPoints} pts</p>
+        )}
+      </div>
+      {editing ? (
+        <motion.button
+          onClick={save}
+          whileTap={{ scale: 0.96 }}
+          className="shrink-0 px-4 py-2 rounded-full text-sm font-bold text-white"
+          style={{ background: 'linear-gradient(90deg, #FFBF8C, #FF6BB5)' }}
+        >
+          Enregistrer
+        </motion.button>
+      ) : (
+        <motion.button
+          onClick={startEditing}
+          whileTap={{ scale: 0.96 }}
+          className="shrink-0 px-4 py-2 rounded-full text-sm font-semibold text-[#9B7DB5] bg-[#F5E0FF]"
+        >
+          Modifier
+        </motion.button>
+      )}
+    </div>
   )
 }
 

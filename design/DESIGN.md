@@ -197,7 +197,7 @@ Everything is soft. Buttons are full pill (`9999px`) — they should feel like s
 - **Button (primary):** Filled `#FF6BB5`, pill, `semibold` — the default CTA. Never use a flat or ghost button as the primary action.
 - **Button (secondary):** Filled `#E8D5F5`, pill, muted text — for lower-priority actions like "View All".
 - **Points widget:** Gradient fill, hero number centered, motivational caption below — always the first element on the Home screen.
-- **Reward card:** White card, image at top (clipped), name + point badge + CTA below. Locked state dims the CTA and swaps badge to muted.
+- **Reward card:** White card, image at top (clipped), name + point badge + CTA below. Locked state dims the CTA and swaps badge to muted. Illustration style is **regular kawaii** (flat-to-soft shading, clean black outline, simple cute shapes) — distinct from the claymorphic UI chrome around it; do not render reward art as 3D clay. The gradient backdrop is **baked directly into each illustration** (rotate across a handful of pastel gradient combinations from the locked palette for variety) — not composited in code.
 - **Task item:** White card, circle checkbox left, name + earns label center, gradient point badge right. Completed state turns checkbox green and dims text.
 - **Job card:** White card, job title prominent, reward callout panel in subdued fill, gradient point badge in header, full-width CTA at bottom.
 - **Progress bar:** Gradient fill on subdued track. Show label row (goal name left, current/total right) and motivational caption below.
@@ -214,6 +214,8 @@ Everything is soft. Buttons are full pill (`9999px`) — they should feel like s
 - Keep black (`#1A1A1A`) as foreground and icon strokes — it references kawaii outline illustration and grounds the palette.
 - Use Nunito at every scale — do not mix in a second typeface.
 - Give reward images generous space — they are the emotional pull of the rewards screen.
+- Draw reward illustrations in **regular kawaii style** — flat-to-soft shading, clean black outlines, simple rounded cute shapes (sticker/stationery energy). Reserve claymorphism (3D inflated clay look) for UI chrome only.
+- Bake the gradient backdrop directly into each reward illustration, rotating across a small set of pastel gradient pairings (from the locked palette) so the grid has variety — don't composite the gradient in code.
 
 ### Don't
 - Don't use the gradient as a page background or decorative fill — it loses impact if overused.
@@ -222,3 +224,4 @@ Everything is soft. Buttons are full pill (`9999px`) — they should feel like s
 - Don't use sharp corners — `border-radius` minimum is 8px on any visible surface.
 - Don't use adult productivity language ("tasks", "objectives", "dashboard") — use "things to do", "rewards", "jobs", "goals".
 - Don't use linear or `ease-in-out` transitions — everything should have a little life to it.
+- Don't render reward illustrations as claymorphism/3D-clay — that's a UI-chrome treatment only; illustrations should be regular flat-to-soft kawaii art with black outlines.

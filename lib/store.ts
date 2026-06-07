@@ -37,6 +37,7 @@ type Store = {
   deleteReward: (id: string) => void
   setPin: (pin: string) => void
   setGoal: (rewardId: string) => void
+  setPointsTo: (amount: number) => void
 }
 
 const uid = () => Math.random().toString(36).slice(2, 10)
@@ -44,7 +45,7 @@ const uid = () => Math.random().toString(36).slice(2, 10)
 const SEED_TASKS: Task[] = [
   { id: uid(), name: 'Lire pendant 20 minutes', points: 10, emoji: '📚', active: true },
   { id: uid(), name: 'Ranger ta chambre', points: 15, emoji: '🧹', active: true },
-  { id: uid(), name: 'Pratiquer le piano', points: 20, emoji: '🎹', active: true },
+  { id: uid(), name: 'Vider le lave-vaisselle', points: 15, emoji: '🍽️', active: true },
 ]
 
 const SEED_JOBS: Job[] = [
@@ -220,6 +221,20 @@ export const useStore = create<Store>()(
           ? s.goals.map(g => g.rewardId === rewardId ? { ...g, active: !g.active } : g)
           : [...s.goals, { id: uid(), rewardId, active: true }],
       })),
+
+      setPointsTo: (amount) => {
+        const current = get().totalPoints()
+        const diff = amount - current
+        if (diff === 0) return
+        set(s => ({
+          ledger: [...s.ledger, {
+            id: uid(),
+            amount: diff,
+            reason: 'Ajustement par un parent',
+            date: new Date().toISOString(),
+          }],
+        }))
+      },
     }),
     { name: 'mia-dashboard' }
   )
