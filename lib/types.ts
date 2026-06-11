@@ -20,7 +20,7 @@ export type Reward = {
   name: string
   pointCost: number
   emoji?: string
-  image?: string
+  gradientIndex: number
   active: boolean
 }
 

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <defs>
+    <linearGradient id="bt-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFBF8C"/>
+      <stop offset="100%" stop-color="#FF6BB5"/>
+    </linearGradient>
+    <linearGradient id="bt-tea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3C19E"/>
+      <stop offset="100%" stop-color="#C9A47E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- backdrop -->
+  <rect width="240" height="240" rx="24" fill="url(#bt-bg)"/>
+
+  <!-- sparkles -->
+  <path d="M40 38 L44 50 L56 54 L44 58 L40 70 L36 58 L24 54 L36 50 Z" fill="#FFFFFF" opacity="0.85"/>
+  <path d="M196 168 L199 177 L208 180 L199 183 L196 192 L193 183 L184 180 L193 177 Z" fill="#FFFFFF" opacity="0.85"/>
+  <circle cx="200" cy="46" r="5" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="34" cy="190" r="6" fill="#FFFFFF" opacity="0.7"/>
+
+  <!-- sticker base -->
+  <rect x="56" y="58" width="128" height="158" rx="26" fill="#FFFFFF"/>
+
+  <!-- straw -->
+  <g transform="rotate(18 150 70)">
+    <rect x="142" y="28" width="16" height="96" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="4"/>
+    <rect x="142" y="50" width="16" height="14" fill="#FF6BB5"/>
+    <rect x="142" y="78" width="16" height="14" fill="#FF6BB5"/>
+  </g>
+
+  <!-- cup lid -->
+  <path d="M78 96 Q78 72 102 70 L140 70 Q164 72 164 96 L164 106 L78 106 Z" fill="#BEE3F8" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M92 82 Q104 74 122 74" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.7" fill="none"/>
+
+  <!-- cup body -->
+  <path d="M82 106 L160 106 L150 198 Q149 208 139 208 L103 208 Q93 208 92 198 Z" fill="#FFF8EE" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- tea fill -->
+  <path d="M88 150 L154 150 L150 198 Q149 208 139 208 L103 208 Q93 208 92 198 Z" fill="url(#bt-tea)" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- tea highlight -->
+  <path d="M96 156 Q104 152 112 156" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.5" fill="none"/>
+
+  <!-- boba pearls -->
+  <circle cx="106" cy="186" r="8" fill="#5A3A26" stroke="#1A1A1A" stroke-width="3"/>
+  <circle cx="124" cy="194" r="8" fill="#5A3A26" stroke="#1A1A1A" stroke-width="3"/>
+  <circle cx="140" cy="184" r="8" fill="#5A3A26" stroke="#1A1A1A" stroke-width="3"/>
+  <circle cx="116" cy="172" r="8" fill="#5A3A26" stroke="#1A1A1A" stroke-width="3"/>
+  <circle cx="134" cy="168" r="8" fill="#5A3A26" stroke="#1A1A1A" stroke-width="3"/>
+
+  <!-- face -->
+  <ellipse cx="108" cy="138" rx="4" ry="6" fill="#1A1A1A"/>
+  <ellipse cx="134" cy="138" rx="4" ry="6" fill="#1A1A1A"/>
+  <circle cx="100" cy="148" r="7" fill="#FF9CC4" opacity="0.7"/>
+  <circle cx="142" cy="148" r="7" fill="#FF9CC4" opacity="0.7"/>
+  <path d="M114 146 Q121 153 128 146" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+</svg>

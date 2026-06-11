@@ -69,30 +69,30 @@ const SEED_JOBS: Job[] = [
 
 const SEED_REWARDS: Reward[] = [
   // Petites gâteries
-  { id: uid(), name: 'Bubble tea', pointCost: 40, image: '/rewards/bubble-tea.webp', active: true },
-  { id: uid(), name: 'Fondue au chocolat', pointCost: 60, image: '/rewards/fondue-chocolat.webp', active: true },
-  { id: uid(), name: 'Peindre des roches', pointCost: 60, image: '/rewards/peindre-roches.webp', active: true },
-  { id: uid(), name: 'Construire un fort', pointCost: 60, image: '/rewards/construire-fort.webp', active: true },
-  { id: uid(), name: 'Fabriquer du slime', pointCost: 70, image: '/rewards/fabriquer-slime.webp', active: true },
-  { id: uid(), name: 'Nouveau squishy', pointCost: 70, image: '/rewards/nouveau-squishy.webp', active: true },
-  { id: uid(), name: 'Soirée cinéma', pointCost: 80, image: '/rewards/soiree-cinema.webp', active: true },
-  { id: uid(), name: 'Rester debout plus tard', pointCost: 80, image: '/rewards/rester-debout.webp', active: true },
-  { id: uid(), name: 'Blind bag mystère', pointCost: 90, image: '/rewards/blind-bag.webp', active: true },
+  { id: uid(), name: 'Bubble tea', pointCost: 40, emoji: '🧋', gradientIndex: 0, active: true },
+  { id: uid(), name: 'Fondue au chocolat', pointCost: 60, emoji: '🍫', gradientIndex: 1, active: true },
+  { id: uid(), name: 'Peindre des roches', pointCost: 60, emoji: '🎨', gradientIndex: 2, active: true },
+  { id: uid(), name: 'Construire un fort', pointCost: 60, emoji: '⛺', gradientIndex: 3, active: true },
+  { id: uid(), name: 'Fabriquer du slime', pointCost: 70, emoji: '🧪', gradientIndex: 4, active: true },
+  { id: uid(), name: 'Nouveau squishy', pointCost: 70, emoji: '🐻', gradientIndex: 0, active: true },
+  { id: uid(), name: 'Soirée cinéma', pointCost: 80, emoji: '🎬', gradientIndex: 1, active: true },
+  { id: uid(), name: 'Rester debout plus tard', pointCost: 80, emoji: '🌙', gradientIndex: 2, active: true },
+  { id: uid(), name: 'Blind bag mystère', pointCost: 90, emoji: '🎁', gradientIndex: 3, active: true },
   // Activités & privilèges
-  { id: uid(), name: 'Chef de la famille pour une soirée', pointCost: 100, image: '/rewards/chef-famille.webp', active: true },
-  { id: uid(), name: 'Kit de dessin', pointCost: 120, image: '/rewards/kit-dessin.webp', active: true },
-  { id: uid(), name: 'Kit Slime', pointCost: 150, image: '/rewards/kit-slime.webp', active: true },
-  { id: uid(), name: 'Sauter une corvée', pointCost: 150, image: '/rewards/sauter-corvee.webp', active: true },
-  { id: uid(), name: 'Lapin en peluche', pointCost: 200, image: '/rewards/lapin-peluche.webp', active: true },
-  { id: uid(), name: 'Peluche style japonais', pointCost: 200, image: '/rewards/peluche-japonaise.webp', active: true },
-  { id: uid(), name: 'Inviter une amie — soirée pyjama', pointCost: 200, image: '/rewards/soiree-pyjama.webp', active: true },
+  { id: uid(), name: 'Chef de la famille pour une soirée', pointCost: 100, emoji: '👑', gradientIndex: 4, active: true },
+  { id: uid(), name: 'Kit de dessin', pointCost: 120, emoji: '🖍️', gradientIndex: 0, active: true },
+  { id: uid(), name: 'Kit Slime', pointCost: 150, emoji: '🧫', gradientIndex: 1, active: true },
+  { id: uid(), name: 'Sauter une corvée', pointCost: 150, emoji: '🙅', gradientIndex: 2, active: true },
+  { id: uid(), name: 'Lapin en peluche', pointCost: 200, emoji: '🐰', gradientIndex: 3, active: true },
+  { id: uid(), name: 'Peluche style japonais', pointCost: 200, emoji: '🐱', gradientIndex: 4, active: true },
+  { id: uid(), name: 'Inviter une amie — soirée pyjama', pointCost: 200, emoji: '🛌', gradientIndex: 0, active: true },
   // Grandes sorties & cadeaux
-  { id: uid(), name: 'Magasiner avec un budget perso', pointCost: 250, image: '/rewards/magasiner.webp', active: true },
-  { id: uid(), name: 'Sortie à l\'aquarium', pointCost: 300, image: '/rewards/sortie-aquarium.webp', active: true },
-  { id: uid(), name: 'Sortie au zoo', pointCost: 300, image: '/rewards/sortie-zoo.webp', active: true },
-  { id: uid(), name: 'Coin cozy dans sa chambre', pointCost: 400, image: '/rewards/coin-cozy.webp', active: true },
-  { id: uid(), name: 'Nintendo Switch Lite', pointCost: 1000, image: '/rewards/nintendo-switch.webp', active: true },
-  { id: uid(), name: 'Meuble IKEA pour sa chambre', pointCost: 800, image: '/rewards/meuble-ikea.webp', active: true },
+  { id: uid(), name: 'Magasiner avec un budget perso', pointCost: 250, emoji: '🛍️', gradientIndex: 1, active: true },
+  { id: uid(), name: 'Sortie à l\'aquarium', pointCost: 300, emoji: '🐠', gradientIndex: 2, active: true },
+  { id: uid(), name: 'Sortie au zoo', pointCost: 300, emoji: '🦁', gradientIndex: 3, active: true },
+  { id: uid(), name: 'Coin cozy dans sa chambre', pointCost: 400, emoji: '🛋️', gradientIndex: 4, active: true },
+  { id: uid(), name: 'Nintendo Switch Lite', pointCost: 1000, emoji: '🎮', gradientIndex: 0, active: true },
+  { id: uid(), name: 'Meuble IKEA pour sa chambre', pointCost: 800, emoji: '🪑', gradientIndex: 1, active: true },
 ]
 
 export const useStore = create<Store>()(
@@ -236,6 +236,23 @@ export const useStore = create<Store>()(
         }))
       },
     }),
-    { name: 'mia-dashboard' }
+    {
+      name: 'mia-dashboard',
+      version: 2,
+      migrate: (persisted, version) => {
+        const state = persisted as Store
+        if (version < 2 && Array.isArray(state.rewards)) {
+          state.rewards = state.rewards.map((r, i) => {
+            const seedMatch = SEED_REWARDS.find(s => s.name === r.name)
+            return {
+              ...r,
+              emoji: r.emoji ?? seedMatch?.emoji ?? '🎁',
+              gradientIndex: typeof r.gradientIndex === 'number' ? r.gradientIndex : seedMatch?.gradientIndex ?? i % 5,
+            }
+          })
+        }
+        return state
+      },
+    }
   )
 )

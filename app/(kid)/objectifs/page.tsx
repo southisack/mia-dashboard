@@ -1,7 +1,6 @@
 'use client'
 
 import { useMemo } from 'react'
-import Image from 'next/image'
 import { useStore } from '@/lib/store'
 import { motion } from 'framer-motion'
 import type { Reward } from '@/lib/types'
@@ -83,13 +82,7 @@ function ActiveGoalCard({
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       <div className="flex items-center gap-4">
-        {reward.image ? (
-          <div className="relative w-16 h-12 rounded-xl overflow-hidden shrink-0">
-            <Image src={reward.image} alt={reward.name} fill className="object-cover" sizes="64px" />
-          </div>
-        ) : (
-          <span className="text-5xl shrink-0">{reward.emoji ?? '🎁'}</span>
-        )}
+        <span className="text-5xl shrink-0">{reward.emoji ?? '🎁'}</span>
         <div className="flex-1 min-w-0">
           <p className="text-white/80 text-xs font-medium">Objectif actuel</p>
           <p className="text-white font-bold text-lg leading-snug">{reward.name}</p>
@@ -158,13 +151,7 @@ function GoalOption({
       transition={{ type: 'spring', stiffness: 300, damping: 22, delay: index * 0.06 }}
       whileTap={{ scale: 0.98 }}
     >
-      {reward.image ? (
-        <div className="relative w-12 h-9 rounded-lg overflow-hidden shrink-0">
-          <Image src={reward.image} alt={reward.name} fill className="object-cover" sizes="48px" />
-        </div>
-      ) : (
-        <span className="text-3xl shrink-0">{reward.emoji ?? '🎁'}</span>
-      )}
+      <span className="text-3xl shrink-0">{reward.emoji ?? '🎁'}</span>
 
       <div className="flex-1 min-w-0 flex flex-col gap-1.5">
         <div className="flex items-center justify-between">

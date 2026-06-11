@@ -1,7 +1,6 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import Image from 'next/image'
 import { useStore } from '@/lib/store'
 import { motion } from 'framer-motion'
 import type { Reward } from '@/lib/types'
@@ -103,29 +102,19 @@ function RewardCard({
 
   return (
     <motion.div
-      className="flex flex-col rounded-b-[20px] bg-white shadow-[0_4px_20px_rgba(213,192,232,0.40)] overflow-hidden"
+      className="flex flex-col rounded-[20px] bg-white shadow-[0_4px_20px_rgba(213,192,232,0.40)] overflow-hidden"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 22, delay: index * 0.06 }}
     >
-      {/* Illustration area — square corners on purpose, card clips the bottom only. Gradient is baked into the illustration itself. */}
+      {/* Illustration area — square corners on purpose, card clips the bottom only. */}
       <div className="relative w-full aspect-[4/3]">
-        {reward.image ? (
-          <Image
-            src={reward.image}
-            alt={reward.name}
-            fill
-            className="object-cover"
-            sizes="200px"
-          />
-        ) : (
-          <div
-            className="w-full h-full flex items-center justify-center text-5xl"
-            style={{ background: illustrationGradient(index) }}
-          >
-            {reward.emoji ?? '🎁'}
-          </div>
-        )}
+        <div
+          className="w-full h-full flex items-center justify-center text-5xl"
+          style={{ background: illustrationGradient(reward.gradientIndex) }}
+        >
+          {reward.emoji ?? '🎁'}
+        </div>
         {canAfford && (
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#FF6BB5]/20 pointer-events-none" />
         )}
