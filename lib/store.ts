@@ -46,6 +46,7 @@ const SEED_TASKS: Task[] = [
   { id: uid(), name: 'Lire pendant 20 minutes', points: 10, emoji: '📚', active: true },
   { id: uid(), name: 'Ranger ta chambre', points: 15, emoji: '🧹', active: true },
   { id: uid(), name: 'Vider le lave-vaisselle', points: 15, emoji: '🍽️', active: true },
+  { id: uid(), name: 'Plier les vêtements', points: 15, emoji: '👕', active: true },
 ]
 
 const SEED_JOBS: Job[] = [
@@ -242,7 +243,7 @@ export const useStore = create<Store>()(
     }),
     {
       name: 'mia-dashboard',
-      version: 3,
+      version: 4,
       migrate: (persisted, version) => {
         const state = persisted as Store
         if (version < 2 && Array.isArray(state.rewards)) {
@@ -259,6 +260,11 @@ export const useStore = create<Store>()(
           const existing = new Set(state.rewards.map((r) => r.name))
           const newRewards = SEED_REWARDS.filter(s => !existing.has(s.name))
           state.rewards = [...state.rewards, ...newRewards]
+        }
+        if (version < 4 && Array.isArray(state.tasks)) {
+          const existing = new Set(state.tasks.map((t) => t.name))
+          const newTasks = SEED_TASKS.filter(s => !existing.has(s.name))
+          state.tasks = [...state.tasks, ...newTasks]
         }
         return state
       },
