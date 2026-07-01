@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useStore } from '@/lib/store'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
+import type { Job } from '@/lib/types'
 
 export default function MissionsParentPage() {
   const jobs = useStore(s => s.jobs)
@@ -18,19 +19,36 @@ export default function MissionsParentPage() {
   const [points, setPoints] = useState('')
   const [reward, setReward] = useState('')
 
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editName, setEditName] = useState('')
+  const [editDescription, setEditDescription] = useState('')
+  const [editPoints, setEditPoints] = useState('')
+  const [editReward, setEditReward] = useState('')
+
   const handleAdd = () => {
     if (!name.trim() || !points || !reward.trim()) return
     addJob({ name: name.trim(), description: description.trim(), points: Number(points), reward: reward.trim(), active: true })
-    setName('')
-    setDescription('')
-    setPoints('')
-    setReward('')
+    setName(''); setDescription(''); setPoints(''); setReward('')
     setShowForm(false)
+  }
+
+  const startEdit = (job: Job) => {
+    if (editingId === job.id) { setEditingId(null); return }
+    setEditingId(job.id)
+    setEditName(job.name)
+    setEditDescription(job.description)
+    setEditPoints(String(job.points))
+    setEditReward(job.reward)
+  }
+
+  const handleSaveEdit = (id: string) => {
+    if (!editName.trim() || !editPoints || !editReward.trim()) return
+    updateJob(id, { name: editName.trim(), description: editDescription.trim(), points: Number(editPoints), reward: editReward.trim() })
+    setEditingId(null)
   }
 
   return (
     <main className="px-6 pt-8 pb-8 flex flex-col gap-5">
-      {/* Header */}
       <div className="flex items-center gap-4">
         <button
           onClick={() => router.back()}
@@ -48,7 +66,6 @@ export default function MissionsParentPage() {
         </button>
       </div>
 
-      {/* Add form */}
       <AnimatePresence>
         {showForm && (
           <motion.div
@@ -99,19 +116,18 @@ export default function MissionsParentPage() {
         )}
       </AnimatePresence>
 
-      {/* Jobs list */}
       <div className="flex flex-col gap-3">
         <AnimatePresence>
           {jobs.map(job => (
             <motion.div
               key={job.id}
-              className="bg-white rounded-[16px] shadow-[0_2px_12px_rgba(213,192,232,0.31)] p-4 flex flex-col gap-2"
+              className="bg-white rounded-[16px] shadow-[0_2px_12px_rgba(213,192,232,0.31)] overflow-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, x: 40 }}
               layout
             >
-              <div className="flex items-start gap-3">
+              <div className="p-4 flex items-start gap-3">
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-sm text-[#1A1A1A]">{job.name}</p>
                   {job.description && (
@@ -121,16 +137,17 @@ export default function MissionsParentPage() {
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <button
-                    onClick={() => updateJob(job.id, { active: !job.active })}
-                    className={`w-10 h-6 rounded-full transition-colors relative ${
-                      job.active ? 'bg-[#FF6BB5]' : 'bg-[#D5C0E8]'
-                    }`}
+                    onClick={() => startEdit(job)}
+                    aria-label="Modifier"
+                    className="text-[#9B7DB5] text-lg w-8 flex items-center justify-center"
                   >
-                    <span
-                      className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${
-                        job.active ? 'left-5' : 'left-1'
-                      }`}
-                    />
+                    ✏️
+                  </button>
+                  <button
+                    onClick={() => updateJob(job.id, { active: !job.active })}
+                    className={`w-10 h-6 rounded-full transition-colors relative ${job.active ? 'bg-[#FF6BB5]' : 'bg-[#D5C0E8]'}`}
+                  >
+                    <span className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${job.active ? 'left-5' : 'left-1'}`} />
                   </button>
                   <button
                     onClick={() => deleteJob(job.id)}
@@ -140,6 +157,63 @@ export default function MissionsParentPage() {
                   </button>
                 </div>
               </div>
+
+              <AnimatePresence>
+                {editingId === job.id && (
+                  <motion.div
+                    className="px-4 pb-4 flex flex-col gap-3 border-t border-[#F5E0FF] pt-3"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+                  >
+                    <input
+                      value={editName}
+                      onChange={e => setEditName(e.target.value)}
+                      placeholder="Nom de la mission"
+                      className="h-12 rounded-[12px] border border-[#D5C0E8] px-4 text-sm focus:outline-none focus:border-[#FF6BB5] text-[#1A1A1A]"
+                    />
+                    <textarea
+                      value={editDescription}
+                      onChange={e => setEditDescription(e.target.value)}
+                      placeholder="Description (optionnel)"
+                      className="rounded-[12px] border border-[#D5C0E8] px-4 py-3 text-sm focus:outline-none focus:border-[#FF6BB5] text-[#1A1A1A] resize-none"
+                      rows={2}
+                    />
+                    <div className="flex gap-2">
+                      <input
+                        value={editPoints}
+                        onChange={e => setEditPoints(e.target.value.replace(/\D/, ''))}
+                        placeholder="Points"
+                        className="w-28 h-12 rounded-[12px] border border-[#D5C0E8] px-4 text-sm focus:outline-none focus:border-[#FF6BB5] text-[#1A1A1A]"
+                        inputMode="numeric"
+                      />
+                      <input
+                        value={editReward}
+                        onChange={e => setEditReward(e.target.value)}
+                        placeholder="Récompense spéciale"
+                        className="flex-1 h-12 rounded-[12px] border border-[#D5C0E8] px-4 text-sm focus:outline-none focus:border-[#FF6BB5] text-[#1A1A1A]"
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setEditingId(null)}
+                        className="flex-1 h-11 rounded-full text-sm font-bold bg-[#F5E0FF] text-[#9B7DB5]"
+                      >
+                        Annuler
+                      </button>
+                      <button
+                        onClick={() => handleSaveEdit(job.id)}
+                        disabled={!editName.trim() || !editPoints || !editReward.trim()}
+                        className="flex-1 h-11 rounded-full text-sm font-bold text-white disabled:opacity-40"
+                        style={{ background: 'linear-gradient(90deg, #FFBF8C, #FF6BB5)' }}
+                      >
+                        Enregistrer
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </AnimatePresence>
