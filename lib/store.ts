@@ -93,6 +93,10 @@ const SEED_REWARDS: Reward[] = [
   { id: uid(), name: 'Coin cozy dans sa chambre', pointCost: 400, emoji: '🛋️', gradientIndex: 4, active: true },
   { id: uid(), name: 'Nintendo Switch Lite', pointCost: 1000, emoji: '🎮', gradientIndex: 0, active: true },
   { id: uid(), name: 'Meuble IKEA pour sa chambre', pointCost: 800, emoji: '🪑', gradientIndex: 1, active: true },
+  // Nouvelles activités
+  { id: uid(), name: 'Arcade', pointCost: 50, emoji: '🕹️', gradientIndex: 2, active: true },
+  { id: uid(), name: 'Camping dans la cour', pointCost: 75, emoji: '🌙', gradientIndex: 3, active: true },
+  { id: uid(), name: 'Café céramique', pointCost: 150, emoji: '🍵', gradientIndex: 4, active: true },
 ]
 
 export const useStore = create<Store>()(
@@ -238,7 +242,7 @@ export const useStore = create<Store>()(
     }),
     {
       name: 'mia-dashboard',
-      version: 2,
+      version: 3,
       migrate: (persisted, version) => {
         const state = persisted as Store
         if (version < 2 && Array.isArray(state.rewards)) {
@@ -250,6 +254,11 @@ export const useStore = create<Store>()(
               gradientIndex: typeof r.gradientIndex === 'number' ? r.gradientIndex : seedMatch?.gradientIndex ?? i % 5,
             }
           })
+        }
+        if (version < 3 && Array.isArray(state.rewards)) {
+          const existing = new Set(state.rewards.map((r) => r.name))
+          const newRewards = SEED_REWARDS.filter(s => !existing.has(s.name))
+          state.rewards = [...state.rewards, ...newRewards]
         }
         return state
       },
