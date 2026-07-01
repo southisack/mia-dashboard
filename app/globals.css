@@ -43,8 +43,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
+html {
   background: #FEF0FF;
+}
+
+html, body {
   color: #1A1A1A;
   font-family: "Nunito", system-ui, sans-serif;
   overscroll-behavior: none;

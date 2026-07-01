@@ -1,22 +1,26 @@
 const sparkles = [
-  { top: '8%', left: '18%', size: 14, color: '#9B7DB5', delay: '0s', duration: '5.5s' },
-  { top: '14%', left: '78%', size: 10, color: '#FF6BB5', delay: '1.2s', duration: '6.5s' },
-  { top: '34%', left: '8%', size: 8, color: '#FFB347', delay: '2.4s', duration: '5s' },
-  { top: '46%', left: '88%', size: 12, color: '#9B7DB5', delay: '0.6s', duration: '7s' },
-  { top: '64%', left: '14%', size: 10, color: '#FF6BB5', delay: '3.1s', duration: '6s' },
-  { top: '78%', left: '70%', size: 14, color: '#FFB347', delay: '1.8s', duration: '6.8s' },
-  { top: '90%', left: '30%', size: 8, color: '#9B7DB5', delay: '2.9s', duration: '5.8s' },
+  { top: '4%',  left: '10%', size: 10, color: '#FF6BB5', delay: '0s',   duration: '5.5s' },
+  { top: '8%',  left: '55%', size: 8,  color: '#9B7DB5', delay: '1.1s', duration: '6.2s' },
+  { top: '12%', left: '82%', size: 13, color: '#FFB347', delay: '0.4s', duration: '7s'   },
+  { top: '18%', left: '30%', size: 7,  color: '#FF6BB5', delay: '2.0s', duration: '5.8s' },
+  { top: '24%', left: '92%', size: 10, color: '#9B7DB5', delay: '3.2s', duration: '6.5s' },
+  { top: '32%', left: '5%',  size: 12, color: '#FFB347', delay: '1.5s', duration: '5.2s' },
+  { top: '38%', left: '68%', size: 8,  color: '#FF6BB5', delay: '0.8s', duration: '6.8s' },
+  { top: '45%', left: '42%', size: 6,  color: '#9B7DB5', delay: '2.6s', duration: '5s'   },
+  { top: '52%', left: '88%', size: 11, color: '#FF6BB5', delay: '1.9s', duration: '7.2s' },
+  { top: '58%', left: '20%', size: 9,  color: '#FFB347', delay: '0.3s', duration: '6s'   },
+  { top: '65%', left: '75%', size: 7,  color: '#9B7DB5', delay: '3.5s', duration: '5.6s' },
+  { top: '70%', left: '48%', size: 13, color: '#FF6BB5', delay: '1.2s', duration: '6.4s' },
+  { top: '76%', left: '8%',  size: 8,  color: '#FFB347', delay: '2.3s', duration: '5.9s' },
+  { top: '83%', left: '62%', size: 10, color: '#9B7DB5', delay: '0.7s', duration: '7.1s' },
+  { top: '90%', left: '35%', size: 7,  color: '#FF6BB5', delay: '1.6s', duration: '5.3s' },
+  { top: '94%', left: '85%', size: 12, color: '#FFB347', delay: '2.9s', duration: '6.7s' },
+  { top: '28%', left: '55%', size: 9,  color: '#FF6BB5', delay: '3.8s', duration: '5.7s' },
 ]
 
 export default function AmbientBackground() {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
-      {/* Kawaii background — bottom right */}
-      <img
-        src="/mia-bg.webp"
-        alt=""
-        className="absolute bottom-0 right-0 w-full opacity-[0.18] object-cover object-bottom select-none"
-      />
       <div
         className="absolute -top-24 -left-20 w-[420px] h-[420px] rounded-full blur-3xl opacity-[0.16] animate-[driftA_22s_ease-in-out_infinite]"
         style={{ background: 'radial-gradient(circle, #FF6BB5 0%, transparent 70%)' }}

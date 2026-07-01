@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" style={{ fontFamily: nunito.style.fontFamily }}>
-      <body className="bg-[#FEF0FF] text-[#1A1A1A] max-w-3xl mx-auto min-h-screen h-full antialiased relative">
+      <body className="text-[#1A1A1A] max-w-3xl mx-auto min-h-screen h-full antialiased relative">
         <AmbientBackground />
         {children}
       </body>
