@@ -11,14 +11,11 @@ const sparkles = [
 export default function AmbientBackground() {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
-      {/* Kawaii tiled background */}
-      <div
-        className="absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage: 'url(/mia-bg.webp)',
-          backgroundRepeat: 'repeat',
-          backgroundSize: '480px auto',
-        }}
+      {/* Kawaii background — bottom right */}
+      <img
+        src="/mia-bg.webp"
+        alt=""
+        className="absolute bottom-0 right-0 w-full opacity-[0.18] object-cover object-bottom select-none"
       />
       <div
         className="absolute -top-24 -left-20 w-[420px] h-[420px] rounded-full blur-3xl opacity-[0.16] animate-[driftA_22s_ease-in-out_infinite]"
